@@ -31,12 +31,8 @@ const foodSchema = new mongoose.Schema({
         required: true
     }
 }, {
-    // Add timestamps 
     timestamps: true
 });
 
-// Create the model
 const Food = mongoose.model('Food', foodSchema);
-
-// Export the model
 export default Food;
