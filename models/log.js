@@ -46,5 +46,19 @@ const logSchema = new mongoose.Schema({
     timestamps: true
 });
 
+logSchema.methods.calcMacros = async function (foods, users) {
+    const foodItems = this.food_ids.map(id => foods.find(food => food.id === id));
+    const user = users.find(user => user.id === this.user_id);
+
+    this.tCals = foodItems.reduce((acc, food) => acc + food.cals, 0);
+    this.tgCarbs = foodItems.reduce((acc, food) => acc + food.gcarbs, 0);
+    this.tgProtein = foodItems.reduce((acc, food) => acc + food.gprotein, 0);
+    this.tgFat = foodItems.reduce((acc, food) => acc + food.gfat, 0);
+    this.metcalTarget = user.tarCals > this.tCals ? false : true;
+    this.calsLeft = user.tarCals - this.tCals;
+
+    await this.save();
+};
+
 const Log = mongoose.model('Log', logSchema);
 export default Log;
