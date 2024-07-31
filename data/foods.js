@@ -46,4 +46,4 @@ const foods = [
     }
 ]
 
-module.exports = foods;
+export default foods;

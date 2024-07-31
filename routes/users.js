@@ -1,7 +1,7 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const usersdata = require("../data/users");
-const bodyparser = require("body-parser");
+import usersdata from "../data/users.js";
+import bodyparser from "body-parser";
 
 //set up body parser
 router.use(bodyparser.urlencoded({ extended: true }));
@@ -77,4 +77,4 @@ router.use((err, req, res, next) => {
     res.status(400).send("Not Found");
 });
 
-module.exports = router;
+export default router;

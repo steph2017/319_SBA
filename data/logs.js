@@ -1,5 +1,5 @@
-const foods = require("./foods");
-const users = require("./users");
+import foods from "./foods.js";
+import users from "./users.js";
 
 const logs = [
     {
@@ -140,4 +140,4 @@ function calculateMacros(logs) {
 
 calculateMacros(logs);
 
-module.exports = logs;
+export default logs;

@@ -1,6 +1,6 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const foodsdata = require("../data/foods");
+import foodsdata from "../data/foods.js";
 
 // outline page routes
 
@@ -74,4 +74,4 @@ router.use((err, req, res, next) => {
     res.status(400).send(err.message);
 });
 
-module.exports = router;
+export default router;

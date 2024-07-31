@@ -4,6 +4,27 @@ html
     title= "Intro Page"
     link(rel="stylesheet", href="/style.css")
   body
+    nav
+      ul
+        li
+          a Logs
+          ul
+            li: a(href="/logs") View Logs
+            li: a(href="/logs/add") Add Log
+            li: a(href="/logs/edit") Edit Log
+        li
+          a Foods
+          ul
+            li: a(href="/foods") View Foods
+            li: a(href="/foods/add") Add Food
+            li: a(href="/foods/edit") Edit Food
+        li
+          a User
+          ul
+            li: a(href="/users") View Users
+            li: a(href="/users/edit") Edit User Profile
+
+
   h1= "Welcome to Calorie Tracker!"
   br
   div

@@ -1,6 +1,6 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const logsdata = require("../data/logs");
+import logsdata from "../data/logs.js";
 
 // outline page routes
 
@@ -80,4 +80,4 @@ router.use((err, req, res, next) => {
     res.status(400).send(err.message);
 });
 
-module.exports = router;
+export default router;

@@ -1,13 +1,13 @@
-const express = require('express');
+import express from "express";
 const app = express();
 const port = 3180;
 
 // serve static files from the styles folder
 app.use(express.static("./styles"));
 
-const fs = require('fs'); //import filesystem to read template views (not sure if I will need with Pug)
-const path = require('path'); // Using Path
-const bodyparser = require("body-parser");
+import fs from "fs"; //import filesystem to read template views (not sure if I will need with Pug)
+import path from "path"; // Using Path
+import bodyparser from "body-parser";
 
 app.use(bodyparser.urlencoded({ extended: true }));
 
@@ -27,13 +27,13 @@ app.get('/add', (req, res) => {
 
 
 //Set Up routes
-const userRoutes = require("./routes/users");
+import userRoutes from "./routes/users.js";
 app.use("/users", userRoutes);
 
-const logRoutes = require("./routes/logs");
+import logRoutes from "./routes/logs.js";
 app.use("/logs", logRoutes);
 
-const foodRoutes = require("./routes/foods");
+import foodRoutes from "./routes/foods.js";
 app.use("/foods", foodRoutes);
 
 
