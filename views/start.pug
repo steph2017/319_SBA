@@ -2,27 +2,39 @@ doctype html
 html
   head
     title= "Intro Page"
+    link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
     link(rel="stylesheet", href="/style.css")
   body
-    nav
-      ul
-        li
-          a Logs
-          ul
-            li: a(href="/logs") View Logs
-            li: a(href="/logs/add") Add Log
-            li: a(href="/logs/edit") Edit Log
-        li
-          a Foods
-          ul
-            li: a(href="/foods") View Foods
-            li: a(href="/foods/add") Add Food
-            li: a(href="/foods/edit") Edit Food
-        li
-          a User
-          ul
-            li: a(href="/users") View Users
-            li: a(href="/users/edit") Edit User Profile
+    nav.navbar.navbar-expand-lg.navbar-light.bg-light
+      button.navbar-toggler(type="button", data-toggle="collapse", data-target="#navbarNav", aria-controls="navbarNav", aria-expanded="false", aria-label="Toggle navigation")
+        span.navbar-toggler-icon
+      .collapse.navbar-collapse#navbarNav
+        ul.navbar-nav
+          li.nav-item
+            a.nav-link Logs
+            ul.dropdown-menu
+              li
+                a.dropdown-item(href="/logs") View Logs
+              li
+                a.dropdown-item(href="/logs/add") Add Log
+              li
+                a.dropdown-item(href="/logs/edit") Edit Log
+          li.nav-item
+            a.nav-link Foods
+            ul.dropdown-menu
+              li
+                a.dropdown-item(href="/foods") View Foods
+              li
+                a.dropdown-item(href="/foods/add") Add Food
+              li
+                a.dropdown-item(href="/foods/edit") Edit Food
+          li.nav-item
+            a.nav-link User
+            ul.dropdown-menu
+              li
+                a.dropdown-item(href="/users") View Users
+              li
+                a.dropdown-item(href="/users/edit") Edit User Profile
 
 
   h1= "Welcome to Calorie Tracker!"
@@ -61,3 +73,7 @@ html
     p="Navigate to the category, then the id number, then \"edit\", and finally use search queries in order to update the specified record:"
       br
       code= "localhost:3180/logs/4/edit?date=20230728&foodids=1&foodids=1&foodids=2&foodids=3&foodids=4"
+
+    script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js")
+    script(src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js")
+    script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js")
