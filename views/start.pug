@@ -11,32 +11,27 @@ html
       .collapse.navbar-collapse#navbarNav
         ul.navbar-nav
           li.nav-item
-            a.nav-link Logs
-            ul.dropdown-menu
-              li
-                a.dropdown-item(href="/logs") View Logs
-              li
-                a.dropdown-item(href="/logs/add") Add Log
-              li
-                a.dropdown-item(href="/logs/edit") Edit Log
+            a.nav-link.dropdown-toggle(id="logsDropdown", role="button", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false") Logs
+            .dropdown-menu(aria-labelledby="logsDropdown")
+              a.dropdown-item(href="/logs") View Logs
+              a.dropdown-item(href="/logs/add") Add Log
+              a.dropdown-item(href="/logs/edit") Edit Log
           li.nav-item
-            a.nav-link Foods
-            ul.dropdown-menu
-              li
-                a.dropdown-item(href="/foods") View Foods
-              li
-                a.dropdown-item(href="/foods/add") Add Food
-              li
-                a.dropdown-item(href="/foods/edit") Edit Food
+            a.nav-link.dropdown-toggle(id="foodsDropdown", role="button", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false") Foods
+            .dropdown-menu(aria-labelledby="foodsDropdown")
+              a.dropdown-item(href="/foods") View Foods
+              a.dropdown-item(href="/foods/add") Add Food
+              a.dropdown-item(href="/foods/edit") Edit Food
           li.nav-item
-            a.nav-link User
-            ul.dropdown-menu
-              li
-                a.dropdown-item(href="/users") View Users
-              li
-                a.dropdown-item(href="/users/edit") Edit User Profile
+            a.nav-link.dropdown-toggle(id="usersDropdown", role="button", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false") Users
+            .dropdown-menu(aria-labelledby="usersDropdown")
+              a.dropdown-item(href="/users") View Users
+              a.dropdown-item(href="/users/edit") Edit User Profile
 
-
+  br
+  br
+  br
+  br
   h1= "Welcome to Calorie Tracker!"
   br
   div
