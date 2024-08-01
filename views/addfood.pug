@@ -1,0 +1,32 @@
+doctype html
+html
+    head
+        title= "Intro Page"
+        link(rel="stylesheet", href="/style.css")
+    body
+        h1= "Admin: Add Data"
+
+        div
+        h3= "Add a Food"
+        div
+        form(action="/foods/added", method="POST")
+            div
+                label(for="food_name") Food Name:
+                input(type="text", id="food_name", name="food_name", placeholder="Carrot", required)
+            div
+                label(for="food_desc") Food Description:
+                input(type="text", id="food_desc" name="food_desc", placeholder="50g of raw carrots", required)
+            div
+                label(for="food_cals") Total Calories:
+                input(type="number", id="food_cals" name="food_cals", placeholder=60, required)
+            div
+                p Food macros:
+            div
+                label(for="gCarbs") Carbs (g):
+                input(type="number", id="gCarbs" name="gCarbs", placeholder=14, required)
+                label(for="gProtein") Protein (g):
+                input(type="number", id="gProtein" name="gProtein", placeholder=1, required)
+                label(for="gFat") Fat (g):
+                input(type="number", id="gFat" name="gFat", placeholder=0, required)
+            div
+                button(type="submit") Submit

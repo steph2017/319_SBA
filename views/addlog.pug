@@ -1,0 +1,24 @@
+doctype html
+html
+  head
+    title= "Intro Page"
+    link(rel="stylesheet", href="/style.css")
+  body
+  h1= "Admin: Add Data"
+  
+  div
+    h3= "Add a Log"
+    div
+    form(action="/logs/added", method="POST")
+      div
+        label(for="userid") User Id:
+        input(type="number", id="userid" name="userid", placeholder=3, required)
+      div
+        label(for="logdate") Log Date:
+        input(type="text", id="logdate", name="logdate", placeholder="YYYYMMDD", required)
+      div
+        label(for="foodids") What did you eat? Enter as list of food ids:
+        input(type="text", id="foodids", name="foodids", placeholder="1,1,2,2,5", required)
+      div
+        button(type="submit") Submit
+  

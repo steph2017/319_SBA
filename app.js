@@ -31,9 +31,9 @@ app.get('/', (req, res) => {
 });
 
 // This is a single route for all the POST requests
-app.get('/add', (req, res) => {
-    res.render("add",);
-});
+// app.get('/add', (req, res) => {
+//     res.render("add",);
+// });
 
 
 //Set Up routes
