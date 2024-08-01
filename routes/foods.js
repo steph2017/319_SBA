@@ -16,10 +16,8 @@ router.post("/added", async (req, res) => {
     try {
         const { food_name, food_desc, food_cals, gCarbs, gProtein, gFat } = req.body;
 
-        //getting a count of total users in the db to start in order to then assign a user id:
         const foodCount = await Food.countDocuments({});
 
-        // Creating documents follows a syntax similar to classes.
         const newFood = new Food({
             id: foodCount + 1,
             name: food_name,
