@@ -1,12 +1,22 @@
 import express from "express";
 const app = express();
-const port = 3180;
+
+//set up env
+import env from 'dotenv';
+env.config();
+
+const port = process.env.PORT;
+
+//set up connectiom
+import mongoose from "mongoose";
+await mongoose.connect(process.env.MONGOURL);
+
 
 // serve static files from the styles folder
 app.use(express.static("./styles"));
 
 import fs from "fs"; //import filesystem to read template views (not sure if I will need with Pug)
-import path from "path"; // Using Path
+import path from "path"; // Using Path  
 import bodyparser from "body-parser";
 
 app.use(bodyparser.urlencoded({ extended: true }));

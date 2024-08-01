@@ -1,5 +1,6 @@
 import express from "express";
 const router = express.Router();
+import User from "../models/user.js";
 import usersdata from "../data/users.js";
 import bodyparser from "body-parser";
 
@@ -9,20 +10,33 @@ router.use(bodyparser.urlencoded({ extended: true }));
 // outline page routes
 
 //process added data
-router.post("/added", (req, res) => {
-    const { username, dailycal, gCarbs, gProtein, gFat } = req.body;
+router.post("/added", async (req, res) => {
+    try {
+        const { username, dailycal, gCarbs, gProtein, gFat } = req.body;
 
-    let result = { //technically dont need to build this to render the parsed info in the response but if we were updating a database we would need to organize the info inputted 
-        id: usersdata.length + 1,
-        username: username,
-        tarCals: dailycal,
-        tarCarbs: gCarbs,
-        tarProtein: gProtein,
-        tarFat: gFat,
-        logs: []
-    };
-    res.setHeader('Content-Type', 'text/plain');
-    result ? res.send(`You added the following record: \nid: ${result.id} \nusername: ${result.username} \nDaily Calorie Target: ${result.tarCals} \nTarget Carbs: ${result.tarCarbs} \nTarget Protein: ${result.tarProtein} \nTarget Fat: ${result.tarFat} \nLogs: ${result.logs} `) : res.status(404).send("Not found");
+        //getting a count of total users in the db to start in order to then assign a user id:
+        const userCount = await User.countDocuments({});
+
+        // Creating documents follows a syntax similar to classes.
+        const newUser = new User({
+            id: userCount + 1,
+            username: username,
+            tarCals: dailycal,
+            tarCarbs: gCarbs,
+            tarProtein: gProtein,
+            tarFat: gFat,
+        });
+
+        await newUser.save();
+
+        res.setHeader('Content-Type', 'text/plain');
+        res.send(`You added the following record: \nid: ${newUser.id} \nusername: ${newUser.username} \nDaily Calorie Target: ${newUser.tarCals} \nTarget Carbs: ${newUser.tarCarbs} \nTarget Protein: ${newUser.tarProtein} \nTarget Fat: ${newUser.tarFat} \nLogs: ${newUser.logs} `);
+
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Error creating new user" });
+    }
 });
 
 //get route via search query
@@ -47,29 +61,29 @@ router.get("/:id", (req, res) => {
 router.get("/:id/delete", (req, res) => {
     let result = usersdata.find(user => user.id === Number(req.params.id));
     res.setHeader('Content-Type', 'text/plain');
-    result ? res.send(`You deleted the following record: \nid: ${result.id} \nusername: ${result.username} \nDaily Calorie Target: ${result.tarCals} \nTarget Carbs: ${result.tarCarbs} \nTarget Protein: ${result.tarProtein} \nTarget Fat: ${result.tarFat} \nLogs: ${result.logs} `) : res.status(404).send("Not found");
+    result ? res.send(`You deleted the following record: \nid: ${newUser.id} \nusername: ${newUser.username} \nDaily Calorie Target: ${newUser.tarCals} \nTarget Carbs: ${newUser.tarCarbs} \nTarget Protein: ${newUser.tarProtein} \nTarget Fat: ${newUser.tarFat} \nLogs: ${newUser.logs} `) : res.status(404).send("Not found");
 });
 
 //delete route - this route is not connected to anything!
 router.delete("/:id/delete", (req, res) => {
     let result = usersdata.find(user => user.id === Number(req.body.id));
     res.setHeader('Content-Type', 'text/plain');
-    result ? res.send(`You deleted the following record: \nid: ${result.id} \nusername: ${result.username} \nDaily Calorie Target: ${result.tarCals} \nTarget Carbs: ${result.tarCarbs} \nTarget Protein: ${result.tarProtein} \nTarget Fat: ${result.tarFat} \nLogs: ${result.logs} `) : res.status(404).send("Not found");
+    result ? res.send(`You deleted the following record: \nid: ${newUser.id} \nusername: ${newUser.username} \nDaily Calorie Target: ${newUser.tarCals} \nTarget Carbs: ${newUser.tarCarbs} \nTarget Protein: ${newUser.tarProtein} \nTarget Fat: ${newUser.tarFat} \nLogs: ${newUser.logs} `) : res.status(404).send("Not found");
 });
 
 //pseudo patch route using GET
 router.get("/:id/edit", (req, res) => {
     let result = usersdata.find(user => user.id === Number(req.params.id));
-    if (req.query.id) result.id = Number(req.query.id);
-    if (req.query.username) result.username = req.query.username;
-    if (req.query.tarCals) result.tarCals = Number(req.query.tarCals);
-    if (req.query.tarCarbs) result.tarCarbs = Number(req.query.tarCarbs);
-    if (req.query.tarProtein) result.tarProtein = Number(req.query.tarProtein);
-    if (req.query.tarFat) result.tarFat = Number(req.query.tarFat);
-    if (req.query.logs) result.logs = req.query.logs.map(id => Number(id));
+    if (req.query.id) newUser.id = Number(req.query.id);
+    if (req.query.username) newUser.username = req.query.username;
+    if (req.query.tarCals) newUser.tarCals = Number(req.query.tarCals);
+    if (req.query.tarCarbs) newUser.tarCarbs = Number(req.query.tarCarbs);
+    if (req.query.tarProtein) newUser.tarProtein = Number(req.query.tarProtein);
+    if (req.query.tarFat) newUser.tarFat = Number(req.query.tarFat);
+    if (req.query.logs) newUser.logs = req.query.logs.map(id => Number(id));
 
     res.setHeader('Content-Type', 'text/plain');
-    result ? res.send(`You deleted the following record: \nid: ${result.id} \nusername: ${result.username} \nDaily Calorie Target: ${result.tarCals} \nTarget Carbs: ${result.tarCarbs} \nTarget Protein: ${result.tarProtein} \nTarget Fat: ${result.tarFat} \nLogs: ${result.logs} `) : res.status(404).send("Not found");
+    result ? res.send(`You deleted the following record: \nid: ${newUser.id} \nusername: ${newUser.username} \nDaily Calorie Target: ${newUser.tarCals} \nTarget Carbs: ${newUser.tarCarbs} \nTarget Protein: ${newUser.tarProtein} \nTarget Fat: ${newUser.tarFat} \nLogs: ${newUser.logs} `) : res.status(404).send("Not found");
 });
 
 //error handler
