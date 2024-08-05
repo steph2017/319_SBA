@@ -43,6 +43,33 @@ const foods = [
         gcarbs: 47,
         gprotein: 35,
         gfat: 8
+    },
+    {
+        id: 6,
+        name: "BBQ Seitan",
+        description: "wheat-based protein strips covered in BBQ sauce",
+        cals: 300,
+        gcarbs: 30,
+        gprotein: 35,
+        gfat: 12
+    },
+    {
+        id: 7,
+        name: "Asparagus",
+        description: "cup of steamed asparagus",
+        cals: 80,
+        gcarbs: 18,
+        gprotein: 2,
+        gfat: 0
+    },
+    {
+        id: 8,
+        name: "Lemonade",
+        description: "1 cup of lemonade",
+        cals: 100,
+        gcarbs: 25,
+        gprotein: 0,
+        gfat: 0
     }
 ]
 

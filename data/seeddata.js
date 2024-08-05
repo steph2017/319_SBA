@@ -34,33 +34,33 @@ export default async function seedData(User, Food, Log) {
 
         // Filter existing users by username
         const newFoods = foodsdata.filter(food => !existingNames.includes(food.name));
-
+        console.log(newFoods);
         if (newFoods.length > 0) {
             await Food.insertMany(newFoods);
-            console.log('Sample data seeded successfully');
+            console.log('Sample food data seeded successfully');
         } else {
-            console.log('No new users to add, all usernames already exist');
+            console.log('No new foods to add, all already exist');
         }
     } else {
-        console.log('Database already has enough users, skipping seed');
+        console.log('Database already has enough foods, skipping seed');
     }
 
     if (logCount < 5) {
         // get log
         const existingLogs = await Log.find({}, { id: 1 });
-        const existingIds = existingIds.map(log => log.id);
+        const existingIds = existingLogs.map(log => log.id);
 
         // Filter existing users by username
         const newLogs = logsdata.filter(log => !existingIds.includes(log.id));
 
         if (newLogs.length > 0) {
             await Log.insertMany(newLogs);
-            console.log('Sample data seeded successfully');
+            console.log('Sample log data seeded successfully');
         } else {
-            console.log('No new users to add, all usernames already exist');
+            console.log('No new logs to add, all already exist');
         }
     } else {
-        console.log('Database already has enough users, skipping seed');
+        console.log('Database already has enough logs, skipping seed');
     }
 
 }

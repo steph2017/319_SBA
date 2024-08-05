@@ -7,19 +7,26 @@ env.config();
 
 const port = process.env.PORT;
 
-//set up connectiom
+//set up connection and seed data
 import mongoose from "mongoose";
-await mongoose.connect(process.env.MONGOURL);
 
-
-// serve static files from the styles folder
-app.use(express.static("./styles"));
-
-// Needed to seed data
 import seedData from "./data/seeddata.js"; //function to load data
 import User from "./models/user.js";
 import Log from "./models/log.js";
 import Food from "./models/food.js";
+
+await mongoose.connect(process.env.MONGOURL);
+//seed data
+try {
+    seedData(User, Food, Log);
+} catch (err) {
+    console.error(err);
+    res.status(500).send('Error seeding data');
+}
+
+// serve static files from the styles folder
+app.use(express.static("./styles"));
+
 
 // Others - may not need
 import fs from "fs"; //import filesystem to read template views (not sure if I will need with Pug)
@@ -39,13 +46,6 @@ app.set('views', './views');
 app.get('/', (req, res) => {
     //front end
     res.render("start",);
-    //seed data
-    try {
-        seedData(User, Food, Log);
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Error seeding data');
-    }
 
 });
 
