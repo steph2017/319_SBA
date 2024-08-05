@@ -60,21 +60,30 @@ router.post("/added", async (req, res) => {
 });
 
 //get route via search query
-router.get("/", (req, res) => {
-    if (req.query.log) {
-        let result = logsdata.find(log => log.id === Number(req.query.log));
-        if (result) res.send(result);
-        else res.status(404).send("Not found");
-    }
-    else {
-        res.send(logsdata);
+router.get("/", async (req, res) => {
+    try {
+        if (req.query.id) {
+            const result = await Log.findOne({ id: Number(req.query.id) });
+            if (result) res.send(result);
+            else res.status(404).send("Not found");
+        }
+        else {
+            const logs = await Log.find();
+            res.send(logs);
+        }
+    } catch (error) {
+        res.status(500).send("Server error");
     }
 });
 
 //get route via path params
-router.get("/:id", (req, res) => {
-    let result = logsdata.find(log => log.id === Number(req.params.id));
-    result ? res.send(result) : res.status(404).send("Not found");
+router.get("/:id", async (req, res) => {
+    try {
+        const result = await Log.findOne({ id: Number(req.params.id) });
+        result ? res.send(result) : res.status(404).send("Not found");
+    } catch (error) {
+        res.status(500).send("Server error");
+    }
 });
 
 

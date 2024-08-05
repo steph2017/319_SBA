@@ -41,21 +41,30 @@ router.post("/added", async (req, res) => {
 });
 
 //get route via search query
-router.get("/", (req, res) => {
-    if (req.query.food) {
-        let result = foodsdata.find(food => food.id === Number(req.query.food));
-        if (result) res.send(result);
-        else res.status(404).send("Not found");
-    }
-    else {
-        res.send(foodsdata);
+router.get("/", async (req, res) => {
+    try {
+        if (req.query.id) {
+            const result = await Food.findOne({ id: Number(req.query.id) });
+            if (result) res.send(result);
+            else res.status(404).send("Not found");
+        }
+        else {
+            const foods = await Food.find();
+            res.send(foods);
+        }
+    } catch (error) {
+        res.status(500).send("Server error");
     }
 });
 
 //get route via path params
-router.get("/:id", (req, res) => {
-    let result = foodsdata.find(food => food.id === Number(req.params.id));
-    result ? res.send(result) : res.status(404).send("Not found");
+router.get("/:id", async (req, res) => {
+    try {
+        const result = await Food.findOne({ id: Number(req.params.id) });
+        result ? res.send(result) : res.status(404).send("Not found");
+    } catch (error) {
+        res.status(500).send("Server error");
+    }
 });
 
 //pseudo delete route using GET

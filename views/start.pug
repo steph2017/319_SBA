@@ -65,33 +65,33 @@ html
     p= "There are 3 categories of data: Users, Logs, and Foods. To look up all data associated with each category simply navigate to either /users /foods or /logs."
     p= "For example, to look up all foods:"
       br
-      code= "localhost:3180/foods"
+      code= "localhost:YOURPORT/foods"
 
     div
     h3= "Fetching Data"
     p= "To locate a single data entry, use the id number by either adding it to the URL or using a search query"
       br
-      code= "localhost:3180/foods/3"
+      code= "localhost:YOURPORT/foods/3"
       br
-      code= "localhost:3180/users?user=2"
+      code= "localhost:YOURPORT/users?id=2"
 
     div
     h3= "Adding Data"
     p="Navigate to /add to submit new data:"
       br
-      code= "localhost:3180/add"
+      code= "localhost:YOURPORT/add"
   
     div
     h3= "Deleting Data"
     p="Navigate to the category, then the id number, then \"delete\" in order to remove the specified record:"
       br
-      code= "localhost:3180/users/4/delete"
+      code= "localhost:YOURPORT/users/4/delete"
 
     div
     h3= "Editing Data"
     p="Navigate to the category, then the id number, then \"edit\", and finally use search queries in order to update the specified record:"
       br
-      code= "localhost:3180/logs/4/edit?date=20230728&foodids=1&foodids=1&foodids=2&foodids=3&foodids=4"
+      code= "localhost:YOURPORT/logs/4/edit?date=20230728&foodids=1&foodids=1&foodids=2&foodids=3&foodids=4"
 
     script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js")
     script(src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js")
