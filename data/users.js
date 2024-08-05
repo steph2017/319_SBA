@@ -25,6 +25,42 @@ const users = [
         tarProtein: 110,
         tarFat: 80,
         logs: [1, 2, 8]
+    },
+    {
+        id: 4,
+        username: "Ngozi333",
+        tarCals: 1300,
+        tarCarbs: 30,
+        tarProtein: 110,
+        tarFat: 80,
+        logs: [1, 2, 8]
+    },
+    {
+        id: 5,
+        username: "Malika798",
+        tarCals: 1300,
+        tarCarbs: 30,
+        tarProtein: 110,
+        tarFat: 80,
+        logs: [1, 2, 8]
+    },
+    {
+        id: 6,
+        username: "Tracy87",
+        tarCals: 1300,
+        tarCarbs: 30,
+        tarProtein: 110,
+        tarFat: 80,
+        logs: [1, 2, 8]
+    },
+    {
+        id: 7,
+        username: "Matthew320",
+        tarCals: 1300,
+        tarCarbs: 30,
+        tarProtein: 110,
+        tarFat: 80,
+        logs: [1, 2, 8]
     }
 ]
 

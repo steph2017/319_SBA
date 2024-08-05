@@ -15,9 +15,19 @@ await mongoose.connect(process.env.MONGOURL);
 // serve static files from the styles folder
 app.use(express.static("./styles"));
 
+// Needed to seed data
+import seedData from "./data/seeddata.js"; //function to load data
+import User from "./models/user.js";
+import Log from "./models/log.js";
+import Food from "./models/food.js";
+
+// Others - may not need
 import fs from "fs"; //import filesystem to read template views (not sure if I will need with Pug)
 import path from "path"; // Using Path  
 import bodyparser from "body-parser";
+
+
+
 
 app.use(bodyparser.urlencoded({ extended: true }));
 
@@ -27,7 +37,16 @@ app.set('views', './views');
 
 // Define a route for the root URL
 app.get('/', (req, res) => {
+    //front end
     res.render("start",);
+    //seed data
+    try {
+        seedData(User, Food, Log);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error seeding data');
+    }
+
 });
 
 // This is a single route for all the POST requests
