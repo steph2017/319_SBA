@@ -5,6 +5,12 @@ html
     link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
     link(rel="stylesheet", href="/style.css")
   body
+    form#deleteFoodForm
+      .form-group
+        label(for="foodId") Food ID
+        input#foodId.form-control(type="text" name="foodId" required)
+      button.btn.btn-danger(type="submit") Delete
+      
     nav.navbar.navbar-expand-lg.navbar-light.bg-light
       button.navbar-toggler(type="button", data-toggle="collapse", data-target="#navbarNav", aria-controls="navbarNav", aria-expanded="false", aria-label="Toggle navigation")
         span.navbar-toggler-icon

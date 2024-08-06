@@ -5,6 +5,22 @@ html
     link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
     link(rel="stylesheet", href="/style.css")
   body
+    //- review
+    //- .container
+    //-     h1 Logs
+    //-     table.table.table-striped
+    //-       thead
+    //-         tr
+    //-           th Log Entry
+    //-           th Edit
+    //-       tbody
+    //-         each log in logs
+    //-           tr
+    //-             td= log.id + ": " + log.date + " - " + log.user_id
+    //-             td
+    //-               a.btn.btn-primary(href=`/logs/${log.id}/edit`) Edit
+
+
     nav.navbar.navbar-expand-lg.navbar-light.bg-light
       button.navbar-toggler(type="button", data-toggle="collapse", data-target="#navbarNav", aria-controls="navbarNav", aria-expanded="false", aria-label="Toggle navigation")
         span.navbar-toggler-icon

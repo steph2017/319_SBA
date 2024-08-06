@@ -24,8 +24,8 @@ try {
     res.status(500).send('Error seeding data');
 }
 
-// serve static files from the styles folder
-app.use(express.static("./styles"));
+// serve static files from the public folder (adjusted to include my api call modules)
+app.use(express.static(path.join(__dirname, 'public')));
 
 
 // Others - may not need
