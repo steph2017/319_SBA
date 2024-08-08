@@ -15,7 +15,7 @@ router.get('/edit', (req, res) => {
     res.render("editlogs",);
 });
 
-//process added data
+//POST
 router.post("/added", async (req, res) => {
     try {
         const { userid, logdate, foodids } = req.body;
@@ -104,7 +104,7 @@ router.patch("/:id/edit", async (req, res) => {
 
     try {
         const result = await Log.findOneAndUpdate(
-            { id: req.params.id },
+            { id: Number(req.params.id) },
             { $set: updatedFields },
             { new: true } // return the updated document not the old one
         );

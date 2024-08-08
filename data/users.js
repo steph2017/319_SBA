@@ -1,5 +1,4 @@
-import User from "../models/user";
-import logs from "./logs";
+// import logs from "./logs";
 
 const users = [
     {
@@ -67,17 +66,20 @@ const users = [
     }
 ]
 
-function findandUpdateLogs(users, logs) {
-    users.forEach(user => {
-        // Filter logs for the specific user_id
-        const userLogs = logs.filter(log => log.user_id === user.id);
-        // Extract log IDs
-        const logIds = userLogs.map(log => log.id);
-        // Update the user's logs field in place
-        user.logs = logIds;
-    });
-}
+// function findandUpdateLogs(users, logs) {
+//     users.forEach(user => {
+//         // Filter logs for the specific user_id
+//         const userLogs = logs.filter(log => log.user_id === user.id);
+//         // Extract log IDs
+//         const logIds = userLogs.map(log => log.id);
+//         // Update the user's logs field in place
+//         user.logs = logIds;
+//     });
+// }
 
-findandUpdateLogs(users, logs);
+// findandUpdateLogs(users, logs);
+//got errors so i am skipping this function - logs will populate if called on backend
+
 
 export default users;
+

@@ -54,7 +54,7 @@ userSchema.methods.findLogs = async function (logs) {
         const logIds = userLogs.map(log => log.id);
         this.logs = logIds;
         await this.save();
-        return logIds;
+
     } catch (error) {
         console.error("Error finding logs:", error);
         throw error;

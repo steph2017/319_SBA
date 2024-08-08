@@ -29,10 +29,10 @@ router.post("/added", async (req, res) => {
             id: foodCount + 1,
             name: food_name,
             description: food_desc,
-            cals: food_cals,
-            gcarbs: gCarbs,
-            gprotein: gProtein,
-            gfat: gFat,
+            cals: Number(food_cals),
+            gcarbs: Number(gCarbs),
+            gprotein: Number(gProtein),
+            gfat: Number(gFat),
         });
 
         await newFood.save();
@@ -100,7 +100,7 @@ router.patch("/:id/edit", async (req, res) => {
 
     try {
         const result = await Food.findOneAndUpdate(
-            { id: req.params.id },
+            { id: Number(req.params.id) },
             { $set: updatedFields },
             { new: true } // return the updated document not the old one
         );
