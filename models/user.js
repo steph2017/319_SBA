@@ -32,5 +32,34 @@ const userSchema = new mongoose.Schema({
     }
 });
 
+userSchema.methods.findLogs = async function () {
+    try {
+        const logs = await Log.find({
+            user_id: this.id,
+            ...criteria
+        });
+        const logIds = logs.map(log => log.id);
+        this.logs = logIds;
+        await this.save();
+        return logIds;
+    } catch (error) {
+        console.error("Error finding logs:", error);
+        throw error;
+    }
+};
+
+userSchema.methods.findLogs = async function (logs) {
+    try {
+        const userLogs = logs.filter(log => log.user_id === this.id);
+        const logIds = userLogs.map(log => log.id);
+        this.logs = logIds;
+        await this.save();
+        return logIds;
+    } catch (error) {
+        console.error("Error finding logs:", error);
+        throw error;
+    }
+};
+
 const User = mongoose.model('User', userSchema);
 export default User;

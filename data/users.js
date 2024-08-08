@@ -1,3 +1,6 @@
+import User from "../models/user";
+import logs from "./logs";
+
 const users = [
     {
         id: 1,
@@ -6,7 +9,7 @@ const users = [
         tarCarbs: 100,
         tarProtein: 80,
         tarFat: 30,
-        logs: [1, 2, 8]
+        logs: []
     },
     {
         id: 2,
@@ -15,7 +18,7 @@ const users = [
         tarCarbs: 400,
         tarProtein: 220,
         tarFat: 55,
-        logs: [3, 5, 6]
+        logs: []
     },
     {
         id: 3,
@@ -24,7 +27,7 @@ const users = [
         tarCarbs: 30,
         tarProtein: 110,
         tarFat: 80,
-        logs: [1, 2, 8]
+        logs: []
     },
     {
         id: 4,
@@ -33,7 +36,7 @@ const users = [
         tarCarbs: 30,
         tarProtein: 110,
         tarFat: 80,
-        logs: [1, 2, 8]
+        logs: []
     },
     {
         id: 5,
@@ -42,7 +45,7 @@ const users = [
         tarCarbs: 30,
         tarProtein: 110,
         tarFat: 80,
-        logs: [1, 2, 8]
+        logs: []
     },
     {
         id: 6,
@@ -51,7 +54,7 @@ const users = [
         tarCarbs: 30,
         tarProtein: 110,
         tarFat: 80,
-        logs: [1, 2, 8]
+        logs: []
     },
     {
         id: 7,
@@ -60,8 +63,21 @@ const users = [
         tarCarbs: 30,
         tarProtein: 110,
         tarFat: 80,
-        logs: [1, 2, 8]
+        logs: []
     }
 ]
+
+function findandUpdateLogs(users, logs) {
+    users.forEach(user => {
+        // Filter logs for the specific user_id
+        const userLogs = logs.filter(log => log.user_id === user.id);
+        // Extract log IDs
+        const logIds = userLogs.map(log => log.id);
+        // Update the user's logs field in place
+        user.logs = logIds;
+    });
+}
+
+findandUpdateLogs(users, logs);
 
 export default users;

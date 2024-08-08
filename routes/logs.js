@@ -20,12 +20,9 @@ router.post("/added", async (req, res) => {
     try {
         const { userid, logdate, foodids } = req.body;
         const newFoodids = foodids.split(',');
-        console.log(newFoodids);
         const numFoodids = newFoodids.map(id => Number(id));
-        console.log(numFoodids);
 
         const logCount = await Log.countDocuments({});
-        console.log(logCount);
 
         const newLog = new Log({
             id: logCount + 1,
@@ -50,7 +47,7 @@ router.post("/added", async (req, res) => {
 
     } catch (err) {
         console.error(err);
-        res.status(500).json({ error: "Error creating new food" });
+        res.status(500).json({ error: "Error creating new log" });
     }
 });
 
