@@ -18,6 +18,7 @@ router.get('/edit', (req, res) => {
 
 //process added data
 
+//POST route
 router.post("/added", async (req, res) => {
     try {
         const { food_name, food_desc, food_cals, gCarbs, gProtein, gFat } = req.body;
@@ -46,7 +47,7 @@ router.post("/added", async (req, res) => {
     }
 });
 
-//get route via search query
+//GET route via search query
 router.get("/", async (req, res) => {
     try {
         if (req.query.id) {
@@ -63,7 +64,7 @@ router.get("/", async (req, res) => {
     }
 });
 
-//get route via path params
+//GET route via path params
 router.get("/:id", async (req, res) => {
     try {
         const result = await Food.findOne({ id: Number(req.params.id) });
@@ -73,7 +74,7 @@ router.get("/:id", async (req, res) => {
     }
 });
 
-//delete route 
+//DELETE route 
 router.delete("/:id/delete", async (req, res) => {
     try {
         const result = await Food.findOneAndDelete({ id: Number(req.params.id) });
