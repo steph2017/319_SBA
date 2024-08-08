@@ -19,14 +19,19 @@ router.get('/edit', (req, res) => {
 router.post("/added", async (req, res) => {
     try {
         const { userid, logdate, foodids } = req.body;
+        const newFoodids = foodids.split(',');
+        console.log(newFoodids);
+        const numFoodids = newFoodids.map(id => Number(id));
+        console.log(numFoodids);
 
         const logCount = await Log.countDocuments({});
+        console.log(logCount);
 
         const newLog = new Log({
-            id: logsdata.length + 1,
-            user_id: userid,
+            id: logCount + 1,
+            user_id: Number(userid),
             date: logdate,
-            food_ids: foodids
+            food_ids: numFoodids
 
         });
 
@@ -47,20 +52,6 @@ router.post("/added", async (req, res) => {
         console.error(err);
         res.status(500).json({ error: "Error creating new food" });
     }
-    let result = {
-        id: logsdata.length + 1,
-        user_id: userid,
-        date: logdate,
-        food_ids: foodids,
-        tCals: "calculations applied",
-        tgCarbs: "calculations applied",
-        tgProtein: "calculations applied",
-        tgFat: "calculations applied",
-        metcalTarget: "calculations applied",
-        calsLeft: "calculations applied"
-    };
-    res.setHeader('Content-Type', 'text/plain');
-    result ? res.send(`You added the following record: \nid: ${newLog.id} \nUser id: ${newLog.user_id} \nLog Date: ${newLog.date} \nFood ids: ${newLog.food_ids} \nCalories Logged: ${newLog.tCals} \nCarbs (g): ${newLog.tgCarbs} \nProtein (g): ${newLog.tgProtein} \nFat (g): ${newLog.tgFat} \nMet Calorie Target?: ${newLog.metcalTarget} \nCalories Remaining: ${newLog.calsLeft}`) : res.status(404).send("Not found");
 });
 
 //get route via search query
@@ -91,36 +82,49 @@ router.get("/:id", async (req, res) => {
 });
 
 
-//pseudo delete route using GET
-router.get("/:id/delete", (req, res) => {
-    let result = logsdata.find(log => log.id === Number(req.params.id));
-    res.setHeader('Content-Type', 'text/plain');
-    result ? res.send(`You deleted the following record: \nid: ${newLog.id} \nUser id: ${newLog.user_id} \nLog Date: ${newLog.date} \nFood ids: ${newLog.food_ids} \nCalories Logged: ${newLog.tCals} \nCarbs (g): ${newLog.tgCarbs} \nProtein (g): ${newLog.tgProtein} \nFat (g): ${newLog.tgFat} \nMet Calorie Target?: ${newLog.metcalTarget} \nCalories Remaining: ${newLog.calsLeft}`) : res.status(404).send("Not found");
+//DELETE route 
+router.delete("/:id/delete", async (req, res) => {
+    try {
+        const result = await Log.findOneAndDelete({ id: Number(req.params.id) });
+
+        res.setHeader('Content-Type', 'text/plain');
+        result ? res.send(`You deleted the following record: \nid: ${result.id} \nUser id: ${result.user_id} \nLog Date: ${result.date} \nFood ids: ${result.food_ids} \nCalories Logged: ${result.tCals} \nCarbs (g): ${result.tgCarbs} \nProtein (g): ${result.tgProtein} \nFat (g): ${result.tgFat} \nMet Calorie Target?: ${result.metcalTarget} \nCalories Remaining: ${result.calsLeft}`) : res.status(404).send("Food not found");
+    } catch (error) {
+        res.status(500).send("Server error");
+    }
 });
 
-//delete route - this route is not connected to anything!
-router.delete("/:id/delete", (req, res) => {
-    let result = logsdata.find(log => log.id === Number(req.body.id));
-    res.setHeader('Content-Type', 'text/plain');
-    result ? res.send(`You deleted the following record: \nid: ${newLog.id} \nUser id: ${newLog.user_id} \nLog Date: ${newLog.date} \nFood ids: ${newLog.food_ids} \nCalories Logged: ${newLog.tCals} \nCarbs (g): ${newLog.tgCarbs} \nProtein (g): ${newLog.tgProtein} \nFat (g): ${newLog.tgFat} \nMet Calorie Target?: ${newLog.metcalTarget} \nCalories Remaining: ${newLog.calsLeft}`) : res.status(404).send("Not found");
-});
 
-//pseudo patch route using GET
-router.get("/:id/edit", (req, res) => {
-    let result = logsdata.find(log => log.id === Number(req.params.id));
-    if (req.query.id) newLog.id = Number(req.query.id);
-    if (req.query.user_id) newLog.user_id = Number(req.query.user_id);
-    if (req.query.date) newLog.date = req.query.date;
-    if (req.query.food_ids) newLog.food_ids = req.query.food_ids.map(id => Number(id));
-    if (req.query.tCals) newLog.tCals = Number(req.query.tCals);
-    if (req.query.tgCarbs) newLog.tgCarbs = Number(req.query.tgCarbs);
-    if (req.query.tgProtein) newLog.tgProtein = Number(req.query.tgProtein);
-    if (req.query.tgFat) newLog.tgFat = Number(req.query.tgFat);
-    req.query.metcalTarget === "true" ? newLog.metcalTarget = true : newLog.metcalTarget = false;
-    if (req.query.calsLeft) newLog.calsLeft = Number(req.query.calsLeft);
+//PATCH route
+router.patch("/:id/edit", async (req, res) => {
+    //instead of multiple db calls, complie all potential updates to an object and query that
+    const updatedFields = {};
 
-    res.setHeader('Content-Type', 'text/plain');
-    result ? res.send(`You updated the following record: \nid: ${newLog.id} \nUser id: ${newLog.user_id} \nLog Date: ${newLog.date} \nFood ids: ${newLog.food_ids} \nCalories Logged: ${newLog.tCals} \nCarbs (g): ${newLog.tgCarbs} \nProtein (g): ${newLog.tgProtein} \nFat (g): ${newLog.tgFat} \nMet Calorie Target?: ${newLog.metcalTarget} \nCalories Remaining: ${newLog.calsLeft}`) : res.status(404).send("Not found");
+    if (req.query.user_id) updatedFields.user_id = Number(req.query.user_id);
+    if (req.query.date) updatedFields.date = req.query.date;
+    if (req.query.food_ids) updatedFields.food_ids = req.query.food_ids.map(id => Number(id));
+    console.log(updatedFields.food_ids);
+
+    try {
+        const result = await Log.findOneAndUpdate(
+            { id: req.params.id },
+            { $set: updatedFields },
+            { new: true } // return the updated document not the old one
+        );
+
+        //filling in the rest of the fields - get all food and user info from db
+        const foods = await Food.find({});
+        const users = await User.find({});
+
+        //Call the calculation method i made 
+        await result.calcMacros(foods, users);
+
+        res.setHeader('Content-Type', 'text/plain');
+        result ? res.send(`You updated the following record: \nid: ${result.id} \nUser id: ${result.user_id} \nLog Date: ${result.date} \nFood ids: ${result.food_ids} \nCalories Logged: ${result.tCals} \nCarbs (g): ${result.tgCarbs} \nProtein (g): ${result.tgProtein} \nFat (g): ${result.tgFat} \nMet Calorie Target?: ${result.metcalTarget} \nCalories Remaining: ${result.calsLeft}`) : res.status(404).send("Log not found");
+    } catch (error) {
+        res.status(500).send("Server error");
+    }
+
 });
 
 //error handler

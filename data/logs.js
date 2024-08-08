@@ -4,9 +4,9 @@ import users from "./users.js";
 const logs = [
     {
         id: 1,
-        user_id: 1,
+        user_id: 4,
         date: "20230815",
-        food_ids: [1, 4],
+        food_ids: [1, 4, 5, 6, 6],
         tCals: 0,
         tgCarbs: 0,
         tgProtein: 0,
@@ -49,9 +49,9 @@ const logs = [
         calsLeft: 0
     }, {
         id: 5,
-        user_id: 2,
+        user_id: 5,
         date: "20230908",
-        food_ids: [5, 5, 5, 5, 5, 5, 5, 5, 5, 5],
+        food_ids: [5, 5, 5, 5, 4, 5, 7, 5, 5, 5],
         tCals: 0,
         tgCarbs: 0,
         tgProtein: 0,
@@ -82,7 +82,7 @@ const logs = [
         calsLeft: 0
     }, {
         id: 8,
-        user_id: 1,
+        user_id: 7,
         date: "20231101",
         food_ids: [4, 4, 4, 4, 5, 5, 5, 5],
         tCals: 0,
@@ -93,7 +93,7 @@ const logs = [
         calsLeft: 0
     }, {
         id: 9,
-        user_id: 3,
+        user_id: 6,
         date: "20240507",
         food_ids: [2, 2, 3, 5],
         tCals: 0,
