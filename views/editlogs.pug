@@ -5,107 +5,47 @@ html
     link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
     link(rel="stylesheet", href="/style.css")
   body
-    //- review
-    //- .container
-    //-     h1 Logs
-    //-     table.table.table-striped
-    //-       thead
-    //-         tr
-    //-           th Log Entry
-    //-           th Edit
-    //-       tbody
-    //-         each log in logs
-    //-           tr
-    //-             td= log.id + ": " + log.date + " - " + log.user_id
-    //-             td
-    //-               a.btn.btn-primary(href=`/logs/${log.id}/edit`) Edit
+    .container
+        h1 Logs
+        table.table.table-striped
+          thead
+            tr
+              th Log Entry
+              th Edit
+          tbody
+            each log in logs
+              tr
+                td= log.id + ": " + log.date + " - " + log.user_id
+                td
+                  a.btn.btn-primary(href=`/logs/${log.id}/edit`) Edit
 
 
-    nav.navbar.navbar-expand-lg.navbar-light.bg-light
-      button.navbar-toggler(type="button", data-toggle="collapse", data-target="#navbarNav", aria-controls="navbarNav", aria-expanded="false", aria-label="Toggle navigation")
-        span.navbar-toggler-icon
-      .collapse.navbar-collapse#navbarNav
-        ul.navbar-nav
-          li.nav-item
-            a.nav-link.dropdown-toggle(id="logsDropdown", role="button", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false") Logs
-            .dropdown-menu(aria-labelledby="logsDropdown")
-              a.dropdown-item(href="/logs") View Logs
-              a.dropdown-item(href="/logs/add") Add Log
-              a.dropdown-item(href="/logs/edit") Edit Log
-          li.nav-item
-            a.nav-link.dropdown-toggle(id="foodsDropdown", role="button", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false") Foods
-            .dropdown-menu(aria-labelledby="foodsDropdown")
-              a.dropdown-item(href="/foods") View Foods
-              a.dropdown-item(href="/foods/add") Add Food
-              a.dropdown-item(href="/foods/edit") Edit Food
-          li.nav-item
-            a.nav-link.dropdown-toggle(id="usersDropdown", role="button", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false") Users
-            .dropdown-menu(aria-labelledby="usersDropdown")
-              a.dropdown-item(href="/users") View Users
-              a.dropdown-item(href="/users/edit") Edit User Profile
 
-  br
-  br
-  br
-  br
-  h1= "Welcome to Calorie Tracker!"
-  br
-  div
-    h2= "Getting Started"
-    p= "Add a user below; Use the navigation bar for all other actions!"
-    br
+ 
+    //- //- div
+    //- //- h3="Data Categories"
+    //- //- p= "There are 3 categories of data: Users, Logs, and Foods. To look up all data associated with each category simply navigate to either /users /foods or /logs."
+    //- //- p= "For example, to look up all foods:"
+    //- //-   br
+    //- //-   code= "localhost:3180/foods"
+
+    //- div
+    //- h3= "Fetching Data"
+    //- p= "To locate a single data entry, use the id number by either adding it to the URL or using a search query"
+    //-   br
+    //-   code= "localhost:3180/foods/3"
+    //-   br
+    //-   code= "localhost:3180/users?user=2"
 
     div
-    form(action="users/added", method="POST")
-      div
-        label(for="username") What is your username?:
-        input(type="text", id="username", name="username", placeholder="Steph123", required)
-      div
-        label(for="dailycal") What is your daily calorie target?:
-        input(type="number", id="dailycal" name="dailycal", placeholder=2000, required)
-      div
-        p What are your daily macro targets?
-      div
-        label(for="gCarbs") Carbs (g):
-        input(type="number", id="gCarbs" name="gCarbs", placeholder=225, required)
-        label(for="gProtein") Protein (g):
-        input(type="number", id="gProtein" name="gProtein", placeholder=125, required)
-        label(for="gFat") Fat (g):
-        input(type="number", id="gFat" name="gFat", placeholder=66, required)
-      div
-        button(type="submit") Submit
-    br
-
-    div
-    h3="Data Categories"
-    p= "There are 3 categories of data: Users, Logs, and Foods. To look up all data associated with each category simply navigate to either /users /foods or /logs."
-    p= "For example, to look up all foods:"
+    h3= "Deleting Logs"
+    p="Navigate to \/\"logs\", then the id number, then \/\"delete\" in order to remove the specified record:"
       br
-      code= "localhost:3180/foods"
+      code= "localhost:3180/logs/7/delete"
 
     div
-    h3= "Fetching Data"
-    p= "To locate a single data entry, use the id number by either adding it to the URL or using a search query"
-      br
-      code= "localhost:3180/foods/3"
-      br
-      code= "localhost:3180/users?user=2"
-
-    div
-    h3= "Adding Data"
-    p="Navigate to /add to submit new data:"
-      br
-      code= "localhost:3180/add"
-  
-    div
-    h3= "Deleting Data"
-    p="Navigate to the category, then the id number, then \"delete\" in order to remove the specified record:"
-      br
-      code= "localhost:3180/users/4/delete"
-
-    div
-    h3= "Editing Data"
-    p="Navigate to the category, then the id number, then \"edit\", and finally use search queries in order to update the specified record:"
+    h3= "Editing Logs"
+    p="Navigate to  \/\"logs\", then the id number, then \/\"edit\", and finally use search queries in order to update the specified record:"
       br
       code= "localhost:3180/logs/4/edit?date=20230728&foodids=1&foodids=1&foodids=2&foodids=3&foodids=4"
 

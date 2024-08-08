@@ -11,6 +11,15 @@ router.get("/add", (req, res) => {
     res.render("addlog",);
 });
 
+router.get('/edit', async (req, res) => {
+    try {
+        const logs = await Log.find();
+        res.render("editlogs", { logs });
+    } catch (err) {
+        res.status(500).send("Error fetching logs: " + err.message);
+    }
+});
+
 //process added data
 router.post("/added", async (req, res) => {
     try {
