@@ -10,6 +10,12 @@ router.get("/add", (req, res) => {
     res.render("addfood",);
 });
 
+router.get('/edit', (req, res) => {
+    //front end
+    res.render("editfoods",);
+
+});
+
 //process added data
 
 router.post("/added", async (req, res) => {

@@ -25,12 +25,13 @@ try {
 }
 
 // serve static files from the public folder (adjusted to include my api call modules)
-app.use(express.static(path.join(__dirname, 'public')));
+import { fileURLToPath } from 'url';
+import path from "path"
+app.use(express.static(path.join(path.dirname(fileURLToPath(import.meta.url)), 'public')));
 
 
 // Others - may not need
 import fs from "fs"; //import filesystem to read template views (not sure if I will need with Pug)
-import path from "path"; // Using Path  
 import bodyparser from "body-parser";
 
 
@@ -48,11 +49,6 @@ app.get('/', (req, res) => {
     res.render("start",);
 
 });
-
-// This is a single route for all the POST requests
-// app.get('/add', (req, res) => {
-//     res.render("add",);
-// });
 
 
 //Set Up routes

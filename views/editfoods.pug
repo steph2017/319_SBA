@@ -5,66 +5,30 @@ html
     link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
     link(rel="stylesheet", href="/style.css")
   body
-    form#deleteFoodForm
-      .form-group
-        label(for="foodId") Food ID
-        input#foodId.form-control(type="text" name="foodId" required)
-      button.btn.btn-danger(type="submit") Delete
-      
-    nav.navbar.navbar-expand-lg.navbar-light.bg-light
-      button.navbar-toggler(type="button", data-toggle="collapse", data-target="#navbarNav", aria-controls="navbarNav", aria-expanded="false", aria-label="Toggle navigation")
-        span.navbar-toggler-icon
-      .collapse.navbar-collapse#navbarNav
-        ul.navbar-nav
-          li.nav-item
-            a.nav-link.dropdown-toggle(id="logsDropdown", role="button", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false") Logs
-            .dropdown-menu(aria-labelledby="logsDropdown")
-              a.dropdown-item(href="/logs") View Logs
-              a.dropdown-item(href="/logs/add") Add Log
-              a.dropdown-item(href="/logs/edit") Edit Log
-          li.nav-item
-            a.nav-link.dropdown-toggle(id="foodsDropdown", role="button", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false") Foods
-            .dropdown-menu(aria-labelledby="foodsDropdown")
-              a.dropdown-item(href="/foods") View Foods
-              a.dropdown-item(href="/foods/add") Add Food
-              a.dropdown-item(href="/foods/edit") Edit Food
-          li.nav-item
-            a.nav-link.dropdown-toggle(id="usersDropdown", role="button", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false") Users
-            .dropdown-menu(aria-labelledby="usersDropdown")
-              a.dropdown-item(href="/users") View Users
-              a.dropdown-item(href="/users/edit") Edit User Profile
-
-  br
-  br
-  br
-  br
-  h1= "Welcome to Calorie Tracker!"
-  br
-  div
-    h2= "Getting Started"
-    p= "Add a user below; Use the navigation bar for all other actions!"
-    br
+    div
+    h3= "Deleting Foods"
+    p="Navigate to /foods, then the id number, then \"delete\" in order to remove the specified record:"
+      br
+      code= "localhost:YOURPORT/foods/4/delete"
 
     div
-    form(action="users/added", method="POST")
-      div
-        label(for="username") What is your username?:
-        input(type="text", id="username", name="username", placeholder="Steph123", required)
-      div
-        label(for="dailycal") What is your daily calorie target?:
-        input(type="number", id="dailycal" name="dailycal", placeholder=2000, required)
-      div
-        p What are your daily macro targets?
-      div
-        label(for="gCarbs") Carbs (g):
-        input(type="number", id="gCarbs" name="gCarbs", placeholder=225, required)
-        label(for="gProtein") Protein (g):
-        input(type="number", id="gProtein" name="gProtein", placeholder=125, required)
-        label(for="gFat") Fat (g):
-        input(type="number", id="gFat" name="gFat", placeholder=66, required)
-      div
-        button(type="submit") Submit
-    br
+    h3= "Editing Data"
+    p="Navigate to the /foods, then the id number, then \"edit\", and finally use search queries in order to update the specified record:"
+      br
+      code= "localhost:YOURPORT/foods/4/edit?name=carrot&description=one%20cup%20of%20steamed%20carrots&gfat=1"
+    p="Acceptable query tags:"
+    ul
+      li name
+      li description
+      li cals
+      li gcarbs
+      li gprotein
+      li gfat
+
+    div(style="text-align: center;")
+            br
+            br
+            a(href="/") Back  
     script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js")
     script(src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js")
     script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js")
