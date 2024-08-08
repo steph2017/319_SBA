@@ -29,7 +29,7 @@ npm start
 <img width="400" alt="image" src="./utilities/landingpage.png">
 
 - Seed data fed to db upon navigating to root and re-seeding if there are too few entries
-<img width="200" alt="image" src="./utilities/SEED.png">
+<img width="500" alt="image" src="./utilities/SEED.png">
 
 - CRUD requests executed by either form (POST requests), navigation (GET requests), or 3rd party client API service provider like POSTMAN (PATCH, DELETE)
 - Form for POST requests (there are 3, one on the langing page for users, and one on /foods/add and /logs/add for the respective data types)
@@ -37,13 +37,13 @@ npm start
 
   
 - GET routes for single id and whole database viewing
-<img width="200" alt="image" src="./utilities/CRUDread.png">
-<img width="200" alt="image" src="./utilities/GETone.png">
+<img width="300" alt="image" src="./utilities/CRUDread.png">
+<img width="350" alt="image" src="./utilities/GETone.png">
 
 - PATCH and Delete routes must be completed in REST client tools such as [Postman](https://www.postman.com/product/api-client/) or [Thunder Client (a VSC extension)](https://www.thunderclient.com/). I tested them via URL navigation as GET requests:
   <img width="400" alt="image" src="./utilities/UpdateDelete.png">
-  <img width="150" alt="image" src="./utilities/CRUDdelete.png">
-  <img width="150" alt="image" src="./utilities/dynamic.png">
+  <img width="300" alt="image" src="./utilities/CRUDdelete.png">
+  <img width="300" alt="image" src="./utilities/dynamic.png">
 
  
 ## Usage
