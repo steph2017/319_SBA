@@ -73,38 +73,20 @@ router.get("/:id", async (req, res) => {
     }
 });
 
-//pseudo delete route using GET
-router.get("/:id/delete", (req, res) => {
-    let result = foodsdata.find(food => food.id === Number(req.params.id));
-    res.setHeader('Content-Type', 'text/plain');
-    result ? res.send(`You deleted the following record: \nid: ${newFood.id} \nName: ${newFood.name} \nDescription: ${newFood.description} \nCalories: ${newFood.cals} \nCarbs (g): ${newFood.gcarbs} \nProtein (g): ${newFood.gprotein} \nFat (g): ${newFood.gfat}`) : res.status(404).send("Not found");
-});
-
-//delete route - this route is not connected to anything!
-router.delete("/:id/delete", (req, res) => {
-    let result = foodsdata.find(food => food.id === Number(req.body.id));
-    res.setHeader('Content-Type', 'text/plain');
-    result ? res.send(`You deleted the following record: \nid: ${newFood.id} \nName: ${newFood.name} \nDescription: ${newFood.description} \nCalories: ${newFood.cals} \nCarbs (g): ${newFood.gcarbs} \nProtein (g): ${newFood.gprotein} \nFat (g): ${newFood.gfat}`) : res.status(404).send("Not found");
-});
-
-// DELETE route from form
-router.delete('/foods/delete', async (req, res) => {
-    const foodId = req.body.foodId;
-
+//delete route 
+router.delete("/:id/delete", async (req, res) => {
     try {
-        const result = await Food.findByIdAndDelete(foodId);
-        if (result) {
-            res.send(`Food item with ID ${foodId} has been deleted.`);
-        } else {
-            res.status(404).send(`Food item with ID ${foodId} not found.`);
-        }
-    } catch (err) {
-        res.status(500).send("Error deleting food item: " + err.message);
+        const result = await Food.findOneAndDelete({ id: Number(req.params.id) });
+
+        res.setHeader('Content-Type', 'text/plain');
+        result ? res.send(`You deleted the following record: \nid: ${result.id} \nName: ${result.name} \nDescription: ${result.description} \nCalories: ${result.cals} \nCarbs (g): ${result.gcarbs} \nProtein (g): ${result.gprotein} \nFat (g): ${result.gfat}`) : res.status(404).send("Food not found");
+    } catch (error) {
+        res.status(500).send("Server error");
     }
 });
 
-//pseudo patch route using GET
-router.get("/:id/edit", (req, res) => {
+//PATCH route
+router.patch("/:id/edit", (req, res) => {
     let result = foodsdata.find(food => food.id === Number(req.params.id));
     if (req.query.id) {
         newFood.id = Number(req.query.id);
