@@ -1,0 +1,34 @@
+doctype html
+html
+  head
+    title= "Edit Users"
+    link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
+    link(rel="stylesheet", href="/style.css")
+  body
+    div
+    h3= "Deleting Users"
+    p="Navigate to \/\"users\", then the id number, then \"delete\" in order to remove the specified record:"
+      br
+      code= "localhost:YOURPORT/users/2/delete"
+
+    div
+    h3= "Editing Users"
+    p="Navigate to the \/\"users\", then the id number, then \"edit\", and finally use search queries in order to update the specified record:"
+      br
+      code= "localhost:YOURPORT/users/4/edit?username=Dan222&tarFat=60&logs=13&logs=14"
+    p="Acceptable query tags:"
+    ul
+      li username
+      li tarCals
+      li tarCarbs
+      li tarProtein
+      li tarFat
+      li logs
+
+    div(style="text-align: center;")
+            br
+            br
+            a(href="/") Back  
+    script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js")
+    script(src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js")
+    script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js")

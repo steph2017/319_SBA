@@ -1,27 +1,10 @@
 doctype html
 html
   head
-    title= "Intro Page"
+    title= "Edit Logs"
     link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
     link(rel="stylesheet", href="/style.css")
   body
-    .container
-        h1 Logs
-        table.table.table-striped
-          thead
-            tr
-              th Log Entry
-              th Edit
-          tbody
-            each log in logs
-              tr
-                td= log.id + ": " + log.date + " - " + log.user_id
-                td
-                  a.btn.btn-primary(href=`/logs/${log.id}/edit`) Edit
-
-
-
- 
     //- //- div
     //- //- h3="Data Categories"
     //- //- p= "There are 3 categories of data: Users, Logs, and Foods. To look up all data associated with each category simply navigate to either /users /foods or /logs."
@@ -36,7 +19,6 @@ html
     //-   code= "localhost:3180/foods/3"
     //-   br
     //-   code= "localhost:3180/users?user=2"
-
     div
     h3= "Deleting Logs"
     p="Navigate to \/\"logs\", then the id number, then \/\"delete\" in order to remove the specified record:"
@@ -47,7 +29,12 @@ html
     h3= "Editing Logs"
     p="Navigate to  \/\"logs\", then the id number, then \/\"edit\", and finally use search queries in order to update the specified record:"
       br
-      code= "localhost:3180/logs/4/edit?date=20230728&foodids=1&foodids=1&foodids=2&foodids=3&foodids=4"
+      code= "localhost:3180/logs/4/edit?date=20230728&food_ids=1&food_ids=1&food_ids=2&food_ids=3&food_ids=4"
+    p="Acceptable query tags:"
+    ul
+      li user_id
+      li date
+      li food_ids
 
     script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js")
     script(src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js")
