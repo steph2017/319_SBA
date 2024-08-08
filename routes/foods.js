@@ -86,31 +86,29 @@ router.delete("/:id/delete", async (req, res) => {
 });
 
 //PATCH route
-router.patch("/:id/edit", (req, res) => {
-    let result = foodsdata.find(food => food.id === Number(req.params.id));
-    if (req.query.id) {
-        newFood.id = Number(req.query.id);
-        if (req.query.name) {
-            newFood.name = req.query.name;
-            if (req.query.description) {
-                newFood.description = req.query.description;
-                if (req.query.cals) {
-                    newFood.cals = Number(req.query.cals);
-                    if (req.query.gcarbs) {
-                        newFood.gcarbs = Number(req.query.gcarbs);
-                        if (req.query.gprotein) {
-                            newFood.gprotein = Number(req.query.gprotein);
-                            if (req.query.gfat) {
-                                newFood.gfat = Number(req.query.gfat);
-                            }
-                        }
-                    }
-                }
-            }
-        }
+router.patch("/:id/edit", async (req, res) => {
+    //instead of multiple db calls, complie all potential updates to an object and query that
+    const updatedFields = {};
+
+    if (req.query.name) updatedFields.name = req.query.name;
+    if (req.query.description) updatedFields.description = req.query.description;
+    if (req.query.cals) updatedFields.cals = Number(req.query.cals);
+    if (req.query.gcarbs) updatedFields.gcarbs = Number(req.query.gcarbs);
+    if (req.query.gprotein) updatedFields.gprotein = Number(req.query.gprotein);
+    if (req.query.gfat) updatedFields.gfat = Number(req.query.gfat);
+
+    try {
+        const result = await Food.findOneAndUpdate(
+            { id: req.params.id },
+            { $set: updatedFields },
+            { new: true } // return the updated document not the old one
+        );
+        res.setHeader('Content-Type', 'text/plain');
+        result ? res.send(`You updated the following record: \nid: ${result.id} \nName: ${result.name} \nDescription: ${result.description} \nCalories: ${result.cals} \nCarbs (g): ${result.gcarbs} \nProtein (g): ${result.gprotein} \nFat (g): ${result.gfat}`) : res.status(404).send("Food not found");
+    } catch (error) {
+        res.status(500).send("Server error");
     }
-    res.setHeader('Content-Type', 'text/plain');
-    res.send(`You updated the following record: \nid: ${newFood.id} \nName: ${newFood.name} \nDescription: ${newFood.description} \nCalories: ${newFood.cals} \nCarbs (g): ${newFood.gcarbs} \nProtein (g): ${newFood.gprotein} \nFat (g): ${newFood.gfat}`);
+
 });
 
 //error handler
